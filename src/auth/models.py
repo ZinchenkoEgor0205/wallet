@@ -11,7 +11,7 @@ class Base(DeclarativeBase):
 
 
 class User(SQLAlchemyBaseUserTable[int], Base):
-    __tablename__ = "user"
+    __tablename__ = "User"
 
     id = Column(Integer, primary_key=True)
     email = Column(String, nullable=False)

@@ -6,11 +6,11 @@ from src.auth.manager import get_user_manager
 from src.auth.models import User
 from src.config import SECRET_AUTH
 
-cookie_transport = CookieTransport(cookie_name="wallet", cookie_max_age=3600)
+cookie_transport = CookieTransport(cookie_name="wallet", cookie_max_age=36000)
 
 
 def get_jwt_strategy() -> JWTStrategy:
-    return JWTStrategy(secret=SECRET_AUTH, lifetime_seconds=3600)
+    return JWTStrategy(secret=SECRET_AUTH, lifetime_seconds=36000)
 
 
 auth_backend = AuthenticationBackend(

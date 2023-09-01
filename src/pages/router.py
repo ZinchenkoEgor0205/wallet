@@ -41,14 +41,17 @@ def get_login(request: Request):
 async def post_login(request: Request, data: OAuth2PasswordRequestForm = Depends(),  db: AsyncSession = Depends(get_async_session)) -> \
 dict[str, str]:
     username = data.username
+
     password = data.password
+    print(username)
+    print(1)
     # user_query = await db.get(User, ident=1)
     results = await db.execute(select(User).where(User.username == username))
-    user = results.scalar()
-    if password != user.hashed_password:
-        raise InvalidCredentialsException
+    # user = results.scalar()
+    # if password != user.hashed_password:
+    #     raise InvalidCredentialsException
     # user = results.scalars().where(username=username)
-    print(user.username)
+    # print(user.username)
     # print(users)
     # user = User.from_orm(user_query)
 
@@ -56,9 +59,10 @@ dict[str, str]:
     # print(user)
     # print(password)
     # print(user_query.username)
-    access_token = manager.create_access_token(
-        data=dict(sub=username)
-    )
+    # access_token = manager.create_access_token(
+    #     data=dict(sub=username)
+    # )
 
-    return {'access_token': access_token, 'token_type': 'bearer'}
+    # return {'access_token': access_token, 'token_type': 'bearer'}
+    return {'test': '1'}
     # return templates.TemplateResponse("login.html", {"request": request, 'access_token': access_token, 'token_type': 'bearer'})

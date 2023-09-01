@@ -5,6 +5,9 @@ from starlette.staticfiles import StaticFiles
 from src.auth.base_config import auth_backend
 from src.auth.schemas import UserRead, UserCreate
 from src.pages.router import router as router_pages, fastapi_users
+from src.common_deposit.router import router as router_common_deposit
+from src.crypto_deposit.router import router as router_crypto_deposit
+from src.router import router as router_main
 
 app = FastAPI(
     title='Wallet'
@@ -14,7 +17,11 @@ app = FastAPI(
 
 app.mount('/src/static', StaticFiles(directory='src/static'), name='static')
 
+app.include_router(router_main)
 app.include_router(router_pages)
+app.include_router(router_common_deposit)
+app.include_router(router_crypto_deposit)
+
 
 
 
