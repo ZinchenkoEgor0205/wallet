@@ -4,9 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="89e3a710-c44a-4e44-9725-3dbf63a6bce2" name="Changes" comment="updated database with CommonDeposit and CryptoDeposit models;&#10;started work on implementing connection with OKX API">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="89e3a710-c44a-4e44-9725-3dbf63a6bce2" name="Changes" comment="Continued workin on okx-API;&#10;now response's cryto section shows amount of every owned currency, cost of this amount in USDT. It also returns calculated total cost of currencies">
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/crypto_deposit/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/crypto_deposit/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/crypto_deposit/schemas.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/crypto_deposit/schemas.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/crypto_deposit/utills.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/crypto_deposit/utills.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/router.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/router.py" afterDir="false" />
     </list>
@@ -40,23 +43,29 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;dev&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/new_projects/wallet/src/crypto_deposit&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "dev",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "D:/new_projects/wallet/src/crypto_deposit",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable",
+    "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "postgresql"
+    ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\new_projects\wallet\src\crypto_deposit" />
@@ -114,7 +123,7 @@
       <workItem from="1693553232294" duration="4305000" />
       <workItem from="1693569222212" duration="21562000" />
       <workItem from="1693637611131" duration="1109000" />
-      <workItem from="1693992143972" duration="3209000" />
+      <workItem from="1693992143972" duration="10001000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit;&#10;added authentication.">
       <option name="closed" value="true" />
@@ -140,7 +149,15 @@
       <option name="project" value="LOCAL" />
       <updated>1693590442940</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Continued workin on okx-API;&#10;now response's cryto section shows amount of every owned currency, cost of this amount in USDT. It also returns calculated total cost of currencies">
+      <option name="closed" value="true" />
+      <created>1693995977278</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1693995977278</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -172,10 +189,11 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Initial commit;&#10;added authentication." />
     <MESSAGE value="updated database with CommonDeposit and CryptoDeposit models;&#10;started work on implementing connection with OKX API" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated database with CommonDeposit and CryptoDeposit models;&#10;started work on implementing connection with OKX API" />
+    <MESSAGE value="Continued workin on okx-API;&#10;now response's cryto section shows amount of every owned currency, cost of this amount in USDT. It also returns calculated total cost of currencies" />
+    <option name="LAST_COMMIT_MESSAGE" value="Continued workin on okx-API;&#10;now response's cryto section shows amount of every owned currency, cost of this amount in USDT. It also returns calculated total cost of currencies" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/wallet$Start_serv.coverage" NAME="Start serv Coverage Results" MODIFIED="1693995008779" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/wallet$Start_serv.coverage" NAME="Start serv Coverage Results" MODIFIED="1694005194217" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/wallet$Unnamed.coverage" NAME="Unnamed Coverage Results" MODIFIED="1693207682858" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
   </component>
 </project>

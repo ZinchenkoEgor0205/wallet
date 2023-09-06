@@ -13,6 +13,6 @@ class CryptoDeposit(Base):
     __tablename__ = "CryptoDeposit"
 
     id = Column(Integer, primary_key=True)
-    type: str = Column(String, nullable=False)
     user_id = Column(Integer, ForeignKey(User.id))
-    api_key: str = Column(String, nullable=False)
+    okx_api_key: str = Column(String, nullable=True)
+    binance_api_key: str = Column(String, nullable=True)

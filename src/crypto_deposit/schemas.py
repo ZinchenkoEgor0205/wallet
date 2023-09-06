@@ -13,6 +13,7 @@ class CryptoDepositRead(BaseModel):
         orm_mode = True
 
 
-class OKXCredentials(BaseModel):
+class BrockerCredentials(BaseModel):
+    api_key: Optional[str] = ''
     secret_key: Optional[str] = ''
     phrase: Optional[str] = ''
