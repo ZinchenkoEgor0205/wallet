@@ -4,15 +4,13 @@ from fastapi import APIRouter, Depends, Response, Request
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from src.auth.models import User
-from src.auth.schemas import UserRead
 from src.common_deposit.models import CommonDeposit
-from src.common_deposit.schemas import CommonDepositRead
 from src.crypto_deposit.models import CryptoDeposit
 from src.crypto_deposit.schemas import OKXCredentials
-from src.crypto_deposit.utills import get_okx_balance
+from src.crypto_deposit.utills import get_okx_balance, get_crypto_sum
 from src.database import get_async_session
-from src.pages.router import fastapi_users, templates
-from sqlalchemy import select, Column, insert
+from src.pages.router import fastapi_users
+from sqlalchemy import select
 
 router = APIRouter(
     prefix="/main",
@@ -32,7 +30,7 @@ async def get_main(request: Request, user: User = Depends(current_user), db: Asy
     okx_api_key = ''
     for row in query:
         deposits['common'][row[1].id] = {'deposit_sum': row[1].sum, 'deposit_income': row[1].income}
-        deposits['crypto'][row[2].id] = {'type': row[2].type, 'api_key': row[2].api_key}
+        deposits['crypto'][row[2].type] = {'api_key': row[2].api_key}
         if row[2].type == 'OKX':
             okx_api_key = row[2].api_key
 
@@ -40,8 +38,8 @@ async def get_main(request: Request, user: User = Depends(current_user), db: Asy
     okx_key = request.cookies.get('okx_key')
     if okx_phrase and okx_key and okx_api_key:
         okx_balance = get_okx_balance(okx_api_key, okx_key, okx_phrase)
-        print(okx_balance)
-
+        deposits['crypto']['OKX'] = okx_balance
+        deposits['crypto']['total_cost_USDT'] = get_crypto_sum(deposits['crypto'])
 
     return {'user': username, 'deposits': deposits}
 

@@ -4,17 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="89e3a710-c44a-4e44-9725-3dbf63a6bce2" name="Changes" comment="Initial commit;&#10;added authentication.">
-      <change afterPath="$PROJECT_DIR$/src/common_deposit/router.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/common_deposit/schemas.py" afterDir="false" />
+    <list default="true" id="89e3a710-c44a-4e44-9725-3dbf63a6bce2" name="Changes" comment="updated database with CommonDeposit and CryptoDeposit models;&#10;started work on implementing connection with OKX API">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/alembic/env.py" beforeDir="false" afterPath="$PROJECT_DIR$/alembic/env.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/auth/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/auth/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/auth/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/auth/utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/database.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/database.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/common_deposit/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/router.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/router.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/crypto_deposit/utills.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/crypto_deposit/utills.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/router.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/router.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,6 +24,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectColorInfo">{
@@ -47,8 +46,9 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/new_projects/wallet/src/main.py&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;dev&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/new_projects/wallet/src/crypto_deposit&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -59,6 +59,7 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\new_projects\wallet\src\crypto_deposit" />
       <recent name="D:\new_projects\wallet\src\templates" />
       <recent name="D:\new_projects\wallet\src\auth" />
     </key>
@@ -111,7 +112,9 @@
       <workItem from="1693202954070" duration="4896000" />
       <workItem from="1693286315954" duration="7027000" />
       <workItem from="1693553232294" duration="4305000" />
-      <workItem from="1693569222212" duration="790000" />
+      <workItem from="1693569222212" duration="21562000" />
+      <workItem from="1693637611131" duration="1109000" />
+      <workItem from="1693992143972" duration="3209000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit;&#10;added authentication.">
       <option name="closed" value="true" />
@@ -129,7 +132,15 @@
       <option name="project" value="LOCAL" />
       <updated>1693292296803</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="updated database with CommonDeposit and CryptoDeposit models;&#10;started work on implementing connection with OKX API">
+      <option name="closed" value="true" />
+      <created>1693590442940</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1693590442940</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -140,7 +151,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/dev" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -148,10 +171,11 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Initial commit;&#10;added authentication." />
-    <option name="LAST_COMMIT_MESSAGE" value="Initial commit;&#10;added authentication." />
+    <MESSAGE value="updated database with CommonDeposit and CryptoDeposit models;&#10;started work on implementing connection with OKX API" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated database with CommonDeposit and CryptoDeposit models;&#10;started work on implementing connection with OKX API" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/wallet$Start_serv.coverage" NAME="Start serv Coverage Results" MODIFIED="1693569645011" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/wallet$Start_serv.coverage" NAME="Start serv Coverage Results" MODIFIED="1693995008779" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/wallet$Unnamed.coverage" NAME="Unnamed Coverage Results" MODIFIED="1693207682858" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
   </component>
 </project>
