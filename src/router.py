@@ -5,7 +5,7 @@ from src.auth.models import User
 from src.common_deposit.models import CommonDeposit
 from src.crypto_deposit.models import CryptoDeposit
 from src.crypto_deposit.schemas import BrockerCredentials
-from src.crypto_deposit.utills import get_binance_data, get_okx_data
+from src.crypto_deposit.utills import get_binance_data, get_okx_data, get_crypto_sum
 from src.database import get_async_session
 from src.pages.router import fastapi_users
 from sqlalchemy import select
@@ -31,9 +31,10 @@ async def get_main(request: Request, user: User = Depends(current_user), db: Asy
         okx_api_key = row[2].okx_api_key
         binance_api_key = row[2].binance_api_key
 
-    deposits = await get_okx_data(okx_api_key, deposits, request)
+    await get_okx_data(okx_api_key, deposits, request)
 
     await get_binance_data(binance_api_key, deposits, request)
+    deposits['crypto']['total_cost_USDT'] = get_crypto_sum(deposits['crypto'])
     return {'user': username, 'deposits': deposits}
 
 
