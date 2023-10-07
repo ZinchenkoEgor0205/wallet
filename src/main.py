@@ -18,11 +18,9 @@ app = FastAPI(
 app.mount('/src/static', StaticFiles(directory='src/static'), name='static')
 
 app.include_router(router_main)
-app.include_router(router_pages)
+# app.include_router(router_pages)
 app.include_router(router_common_deposit)
 app.include_router(router_crypto_deposit)
-
-
 
 
 app.include_router(
@@ -38,11 +36,13 @@ app.include_router(
 )
 
 
+origins = ['http://127.0.0.1:3000']
+
 
 app.add_middleware(
     CORSMiddleware,
     allow_credentials=True,
+    allow_origins=origins,
     allow_methods=["GET", "POST", "OPTIONS", "DELETE", "PATCH", "PUT"],
-    allow_headers=["Content-Type", "Set-Cookie", "Access-Control-Allow-Headers", "Access-Control-Allow-Origin",
-                   "Authorization"],
+    allow_headers=["*"],
 )

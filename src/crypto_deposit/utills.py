@@ -1,7 +1,10 @@
+
+
 import okx.Earning as Earn
 from okx import Funding
 from okx import Account
 from okx import MarketData
+
 import binance
 
 
@@ -13,10 +16,10 @@ def get_crypto_sum(crypto_wallet: dict):
                 total_sum += ccy_data['cost_USDT']
             else:
                 total_sum += ccy_data['amount']
-    return total_sum
+    return round(total_sum, 4)
 
 
-async def get_market_data(api_key: str, secret_key: str, passphrase: str, currencies: list) -> dict:
+async def get_market_data(api_key: str, secret_key: str, passphrase: str, currencies) -> dict:
     flag = '0'
     market_api = MarketData.MarketAPI(api_key, secret_key, passphrase, flag=flag, debug=False)
     prices = {}
@@ -32,6 +35,7 @@ async def get_market_data(api_key: str, secret_key: str, passphrase: str, curren
 async def get_okx_balance(api_key, secret_key, passphrase) -> dict:
     flag = '0'
     assets = {}
+
     balance_api = Funding.FundingAPI(api_key, secret_key, passphrase, flag=flag, debug=False)
     balance = balance_api.get_balances()
     earn_api = Earn.EarningAPI(api_key, secret_key, passphrase, flag=flag, debug=False)
@@ -41,45 +45,39 @@ async def get_okx_balance(api_key, secret_key, passphrase) -> dict:
 
     for data in balance['data']:
         ccy = data['ccy']
-        amount = round((float(data['availBal'])), 4)
+        amount_available, amount_frozen = round(float(data['availBal']), 4), round(float(data['frozenBal']), 4)
+        amount = amount_available + amount_frozen
         if amount <= 0.0001:
             continue
-        if assets.get(ccy):
-            if assets[ccy].get('amount'):
-                assets[ccy]['amount'] += amount
-            else:
-                assets[ccy]['amount'] = amount
-        else:
-            assets[ccy] = {}
-            assets[ccy]['amount'] = amount
+        assets[ccy] = manage_amounts(assets.get(ccy), amount, amount_available, amount_frozen)
 
     for data in trade_balance['data'][0]['details']:
-        amount = round((float(data['availBal'])), 4)
+        amount_available, amount_frozen = round(float(data['availBal']), 4), round(float(data['frozenBal']), 4)
+        amount = round(amount_available + amount_frozen, 4)
         if amount <= 0.0001:
             continue
         ccy = data['ccy']
-        if assets.get(ccy):
-            if assets[ccy].get('amount'):
-                assets[ccy]['amount'] += amount
-            else:
-                assets[ccy]['amount'] = amount
-        else:
-            assets[ccy] = {}
-            assets[ccy]['amount'] = amount
-        assets[ccy]['amount'] = amount
+        assets[ccy] = manage_amounts(assets.get(ccy), amount, amount_available, amount_frozen)
 
     for data in earn['data']:
         ccy = data['ccy']
-        amount = round((float(data['amt'])), 4)
-        earnings = round((float(data['earnings'])), 4)
+        amount = float(data['amt'])
+        earnings = float(data['earnings'])
+        amount_on_earn = round(amount + earnings, 4)
         if assets.get(ccy):
             if assets[ccy].get('amount'):
-                assets[ccy]['amount'] += amount + earnings
+                assets[ccy]['amount'] += amount_on_earn
             else:
-                assets[ccy]['amount'] = amount + earnings
+                assets[ccy]['amount'] = amount_on_earn
+
+            if assets[ccy].get('earn'):
+                assets[ccy]['earn'] += amount_on_earn
+            else:
+                assets[ccy]['earn'] = amount_on_earn
         else:
-            assets[ccy] = {}
-            assets[ccy]['amount'] = amount + earnings
+            assets[ccy] = dict()
+            assets[ccy]['amount'] = amount_on_earn
+            assets[ccy]['earn'] = amount_on_earn
         assets[ccy]['amount'] = round(assets[ccy]['amount'], 4)
     ccy_prices = await get_market_data(api_key, secret_key, passphrase, assets.keys())
     for ccy in ccy_prices.keys():
@@ -111,3 +109,27 @@ async def get_binance_data(binance_api_key: str, deposits: dict, request) -> dic
             binance_assets[ccy]['amount'] = current_sum
     deposits['crypto']['binance'] = binance_assets
     return deposits
+
+
+def manage_amounts(ccy: dict, amount: float, amount_available: float, amount_frozen: float) -> dict:
+    if ccy:
+        if ccy.get('amount'):
+            ccy['amount'] += amount
+        else:
+            ccy['amount'] = amount
+
+        if ccy.get('available'):
+            ccy['available'] += amount_available
+        else:
+            ccy['available'] = amount_available
+        if ccy.get('available'):
+            ccy['frozen'] += amount_frozen
+        else:
+            ccy['frozen'] = amount_frozen
+    else:
+        ccy = dict()
+        ccy['amount'] = amount
+        ccy['available'] = amount_available
+        ccy['frozen'] = amount_frozen
+    ccy['amount'] = amount
+    return ccy

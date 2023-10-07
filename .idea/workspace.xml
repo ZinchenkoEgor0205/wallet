@@ -4,11 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="89e3a710-c44a-4e44-9725-3dbf63a6bce2" name="Changes" comment="Changed the structure of get_main router to give us an opportunity to add more crypto sources to the response">
+    <list default="true" id="89e3a710-c44a-4e44-9725-3dbf63a6bce2" name="Changes" comment="optimized data receiving from okx;&#10;added connection with binance API with getting trade account info">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/probe/probe.py" beforeDir="false" afterPath="$PROJECT_DIR$/probe/probe.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/auth/base_config.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/auth/base_config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/auth/manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/auth/manager.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/crypto_deposit/utills.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/crypto_deposit/utills.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/router.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/router.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -149,7 +151,26 @@
       <workItem from="1693569222212" duration="21562000" />
       <workItem from="1693637611131" duration="1109000" />
       <workItem from="1693992143972" duration="11023000" />
-      <workItem from="1694240819137" duration="7938000" />
+      <workItem from="1694240819137" duration="8289000" />
+      <workItem from="1694282705476" duration="2016000" />
+      <workItem from="1694443265066" duration="7870000" />
+      <workItem from="1694495654025" duration="2007000" />
+      <workItem from="1694500837954" duration="3975000" />
+      <workItem from="1694525872672" duration="2208000" />
+      <workItem from="1694603134308" duration="2498000" />
+      <workItem from="1694612661621" duration="2311000" />
+      <workItem from="1694669526904" duration="1892000" />
+      <workItem from="1694692576994" duration="1392000" />
+      <workItem from="1694946172680" duration="608000" />
+      <workItem from="1694958443598" duration="5000" />
+      <workItem from="1695281858362" duration="1357000" />
+      <workItem from="1695300445989" duration="1351000" />
+      <workItem from="1695369096715" duration="972000" />
+      <workItem from="1695742770619" duration="1107000" />
+      <workItem from="1696000737166" duration="710000" />
+      <workItem from="1696244760877" duration="493000" />
+      <workItem from="1696247836289" duration="674000" />
+      <workItem from="1696694176502" duration="4681000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit;&#10;added authentication.">
       <option name="closed" value="true" />
@@ -191,7 +212,15 @@
       <option name="project" value="LOCAL" />
       <updated>1694005696269</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="optimized data receiving from okx;&#10;added connection with binance API with getting trade account info">
+      <option name="closed" value="true" />
+      <created>1694259232621</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1694259232621</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -225,11 +254,12 @@
     <MESSAGE value="updated database with CommonDeposit and CryptoDeposit models;&#10;started work on implementing connection with OKX API" />
     <MESSAGE value="Continued workin on okx-API;&#10;now response's cryto section shows amount of every owned currency, cost of this amount in USDT. It also returns calculated total cost of currencies" />
     <MESSAGE value="Changed the structure of get_main router to give us an opportunity to add more crypto sources to the response" />
-    <option name="LAST_COMMIT_MESSAGE" value="Changed the structure of get_main router to give us an opportunity to add more crypto sources to the response" />
+    <MESSAGE value="optimized data receiving from okx;&#10;added connection with binance API with getting trade account info" />
+    <option name="LAST_COMMIT_MESSAGE" value="optimized data receiving from okx;&#10;added connection with binance API with getting trade account info" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/wallet$probe.coverage" NAME="probe Coverage Results" MODIFIED="1694250165020" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/probe" />
-    <SUITE FILE_PATH="coverage/wallet$Start_serv.coverage" NAME="Start serv Coverage Results" MODIFIED="1694258891155" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/wallet$probe.coverage" NAME="probe Coverage Results" MODIFIED="1696247903735" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/probe" />
+    <SUITE FILE_PATH="coverage/wallet$Start_serv.coverage" NAME="Start serv Coverage Results" MODIFIED="1696709023453" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/wallet$Unnamed.coverage" NAME="Unnamed Coverage Results" MODIFIED="1693207682858" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
   </component>
 </project>

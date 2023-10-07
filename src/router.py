@@ -32,8 +32,10 @@ async def get_main(request: Request, user: User = Depends(current_user), db: Asy
         binance_api_key = row[2].binance_api_key
 
     await get_okx_data(okx_api_key, deposits, request)
-
-    await get_binance_data(binance_api_key, deposits, request)
+    try:
+        await get_binance_data(binance_api_key, deposits, request)
+    except Exception as err:
+        print(err)
     deposits['crypto']['total_cost_USDT'] = get_crypto_sum(deposits['crypto'])
     return {'user': username, 'deposits': deposits}
 
@@ -55,8 +57,9 @@ async def post_cookie_okx(okx_credentials: BrockerCredentials, response: Respons
 @router.post('/cookie-Binance')
 async def post_cookie_binance(binance_credentials: BrockerCredentials, response: Response,
                               user: User = Depends(current_user), db: AsyncSession = Depends(get_async_session)):
-    if binance_credentials.phrase and binance_credentials.secret_key:
+    if binance_credentials.phrase:
         response.set_cookie(key='binance_phrase', value=binance_credentials.phrase)
+    if binance_credentials.secret_key:
         response.set_cookie(key='binance_key', value=binance_credentials.secret_key)
 
     query = await db.execute(select(User, CryptoDeposit).join(CryptoDeposit, User.id == CryptoDeposit.user_id).where(User.username == user.username))
